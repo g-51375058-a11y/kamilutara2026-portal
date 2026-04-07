@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>KAMIL Portal</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+text-align:center;
+}
+
+header{
+background:#064420;
+color:white;
+padding:20px;
+}
+
+section{
+background:white;
+margin:30px;
+padding:20px;
+border-radius:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+}
+
+th{
+background:#064420;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>KAMIL PORTAL</h1>
+
+<p>Keputusan & Susunan Peserta</p>
+
+</header>
+
+<section>
+
+<h2>Susunan Peserta</h2>
+
+<table id="pesertaTable">
+
+<thead>
+
+<tr>
+<th>Bil</th>
+<th>Acara</th>
+<th>Sekolah</th>
+<th>Peserta</th>
+</tr>
+
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</section>
+
+<section>
+
+<h2>Keputusan</h2>
+
+<table id="keputusanTable">
+
+<thead>
+
+<tr>
+<th>Acara</th>
+<th>Johan</th>
+<th>Naib Johan</th>
+<th>Ketiga</th>
+</tr>
+
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</section>
+
+<script>
+
+const api = "https://script.google.com/macros/s/AKfycbzcCm6FVmQflnZ-_KIdmLqXj_nmZuJOCOdr47NZV_GOQUg-SznvaTJWPc9nAYuuI0kM8w/exec";
+
+fetch(api)
+.then(res => res.json())
+.then(data => {
+
+let pesertaHTML = "";
+
+data.peserta.forEach(p=>{
+
+pesertaHTML += `
+<tr>
+<td>${p.bil}</td>
+<td>${p.acara}</td>
+<td>${p.sekolah}</td>
+<td>${p.peserta}</td>
+</tr>
+`;
+
+});
+
+document.querySelector("#pesertaTable tbody").innerHTML = pesertaHTML;
+
+let keputusanHTML = "";
+
+data.keputusan.forEach(k=>{
+
+keputusanHTML += `
+<tr>
+<td>${k.acara}</td>
+<td>${k.johan}</td>
+<td>${k.naib}</td>
+<td>${k.ketiga}</td>
+</tr>
+`;
+
+});
+
+document.querySelector("#keputusanTable tbody").innerHTML = keputusanHTML;
+
+});
+
+</script>
+
+</body>
+</html>
